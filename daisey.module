@@ -2,5 +2,5 @@
 
 function daisey_boot()
 {
-  print_r(drupal_get_path_alias());
+	echo drupal_get_path_alias();
 }
