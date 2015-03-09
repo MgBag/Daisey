@@ -31,7 +31,7 @@
 			"file": "daisey.module",
 			"settings":
 			{
-				"buffer_size": 2206,
+				"buffer_size": 2399,
 				"line_ending": "Unix"
 			}
 		}
@@ -39,9 +39,33 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 104.0,
+		"height": 392.0,
 		"selected_items":
 		[
+			[
+				"close ",
+				"Project: Close"
+			],
+			[
+				"install ",
+				"Package Control: Install Package"
+			],
+			[
+				"sublimeLinter: lin",
+				"SublimeLinter: Lint This View"
+			],
+			[
+				"set Syntax: php",
+				"Set Syntax: PHP"
+			],
+			[
+				"set s",
+				"Set Syntax: PHP"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
 			[
 				"porject",
 				"Project: Save As"
@@ -99,7 +123,7 @@
 				"Set Syntax: R Console"
 			]
 		],
-		"width": 400.0
+		"width": 416.0
 	},
 	"console":
 	{
@@ -120,27 +144,26 @@
 	},
 	"expanded_folders":
 	[
-		"/C/GitHub/Daisey",
-		"/C/GitHub/Daisey/files",
-		"/C/GitHub/Daisey/files/rnotes",
-		"/C/GitHub/Daisey/files/rnotes/Skins",
-		"/C/GitHub/Daisey/files/rnotes/Skins/Default",
-		"/C/GitHub/Daisey/files/rnotes/Skins/Default/Stylesheets",
-		"/C/GitHub/Daisey/files/rnotes/Skins/Default/Stylesheets/Images"
+		"/C/GitHub/Daisey"
 	],
 	"file_history":
 	[
+		"/C/GitHub/Daisey/daisey.module",
+		"/C/GitHub/Daisey/README.txt",
+		"/C/GitHub/Daisey/sftp-config.json",
+		"/C/GitHub/Daisey/Daisey.sublime-project",
+		"/C/GitHub/Daisey/test.php",
+		"/C/GitHub/Daisey/ignore/daisey.install",
+		"/C/GitHub/Daisey/files/rnotes/Content/Rln_InSite/InSite_2.2_releasenotes.htm",
+		"/C/GitHub/Daisey/files/rnotes/index.htm",
 		"/C/GitHub/Daisey/files/hello.html",
 		"/C/Users/Benjamin/AppData/Local/Temp/Rar$DIa0.857/custom_module.module",
 		"/C/Users/Benjamin/AppData/Local/Temp/Rar$DIa0.016/custom_module.module",
-		"/C/GitHub/Daisey/daisey.module",
 		"/C/GitHub/Daisey/daisey.info",
 		"/C/GitHub/Daisey/daisey.api.php",
 		"/C/GitHub/Daisey/daisey.install",
-		"/C/GitHub/Daisey/README.txt",
 		"/C/GitHub/Daisey/Fearch.sublime-project",
 		"/C/GitHub/Daisey/custom_module.api.php",
-		"/C/GitHub/Daisey/sftp-config.json",
 		"/C/GitHub/Fearch/README.txt",
 		"/C/GitHub/Fearch/Fearch.sublime-project",
 		"/C/GitHub/Fearch/fearch.module",
@@ -199,6 +222,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"				if (ob_get_level()) \n				{\n					ob_end_clean();\n				}",
+			"				foreach ($headers as $name => $value) \n				{\n					drupal_add_http_header($name, $value);\n				}\n\n				drupal_send_headers();\n				\n				// Transfer file in 1024 byte chunks to save memory usage.\n				if ($fd = fopen($filePath, 'rb')) \n				{\n					while (!feof($fd)) \n					{\n						print fread($fd, 1024);\n					}\n					fclose($fd);\n				}\n				else \n				{\n					//drupal_not_found();\n					echo \"Nou, dan niet he!\";\n				}\n",
 			"				if (ob_get_level()) \n				{\n					ob_end_clean();\n				}",
 			"  ",
 			"    ",
@@ -264,15 +289,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2206,
+						"buffer_size": 2399,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1000,
-								1000
+								1581,
+								1581
 							]
 						],
 						"settings":
@@ -280,10 +305,11 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": true,
-							"syntax": "Packages/HTML/HTML.tmLanguage"
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 432.0,
+						"translation.y": 90.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -352,7 +378,7 @@
 		[
 			[
 				"",
-				"C:\\SublimeProjects\\sftp-config.sublime-project"
+				"C:\\GitHub\\Fearch\\Fearch.sublime-project"
 			]
 		],
 		"width": 380.0

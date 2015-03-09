@@ -55,7 +55,7 @@ function daisey_init()
 				$headers = array(
 					header('Content-Type:' . $mime),
 					header('Content-Length:' . $size),
-					header('Cache-Control: private'),
+					header('Cache-Control: max-age=604800, public'),
 					);
 
 				if (ob_get_level()) 
