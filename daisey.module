@@ -6,48 +6,33 @@ error_reporting(-1);
 
 function daisey_init() 
 {
-	//echo "<br><br><br><br><br><br><br>This uses drupal yes!";
-
-	//$filePath = drupal_get_path('module', 'daisey') . '/files' . $_SERVER['REQUEST_URI'];
-
-	//echo "<br>" . $filePath;
-
-	//echo "<br>File exists: ";
-	//var_dump(file_exists($filePath));
-
-	//echo "<br>";
-	//var_dump($GLOBALS["file_exists"]);
-
-	//$tex = explode(".", $filePath);
-	//echo "<br>" . $tex[count($tex) - 1];
-
+	// User is logged in and the page does not excist
 	if(user_is_logged_in() && !menu_get_item($_GET['q'])) 
 	{
+		$allowedFileTypes = array("htm", "html", "css", "js", "png", "jpg", "gif", "png", "xml", "jpeg");
 		$uriWQ =  explode("?", $_SERVER["REQUEST_URI"]);
 
 		$filePath = drupal_get_path('module', 'daisey') . '/files' . $uriWQ[0];
 
 		if (file_exists($filePath))
 		{
-			$GLOBALS["file_exists"] = true;
-
 			$tex = explode(".", $filePath);
+			$tex = $tex[0];
 
-			if (true)//$tex[count($tex) - 1] != "html" && $tex[count($tex) - 1] != "htm")
+			if (array_search($tex, $allowedFileTypes) !== false)
 			{
-				$GLOBALS["file_exists"] = false;
-
 				$finfo = finfo_open(FILEINFO_MIME_TYPE);
 				$mime = finfo_file($finfo, $filePath);
 				finfo_close($finfo);
 
 				$size = filesize($filePath);
 
-				if (strtolower($tex[count($tex) - 1]) == "css")
+				// New mimetype standard fix
+				if (strtolower($tex) == "css")
 				{
 					$mime = "text/css";
 				}
-				else if (strtolower($tex[count($tex) - 1]) == "js")
+				else if (strtolower($tex) == "js")
 				{
 					$mime = "application/javascript";
 				}
@@ -70,7 +55,6 @@ function daisey_init()
 
 				drupal_send_headers();
 				
-				// Transfer file in 1024 byte chunks to save memory usage.
 				if ($fd = fopen($filePath, 'rb')) 
 				{
 					while (!feof($fd)) 
@@ -88,29 +72,5 @@ function daisey_init()
 				drupal_exit();
 			}
 		}
-	}
-}
-
-function daisey_page_alter(&$page)
-{
-	if ($GLOBALS["file_exists"])
-	{
-		$GLOBALS["file_exists"] = false;
-
-		foreach (system_region_list($GLOBALS['theme_key']) as $key => $value) 
-		{
-			if (
-				$value != "Call Us" &&
-				$value != "Socials" &&
-				$value != "Logo" &&
-				$value != "Page Title" &&
-				$value != "Navigation"
-				)
-			{
-				unset($page[$key]);
-			}
-		}
-
-		$page['content']['#markup'] = file_get_contents(drupal_get_path('module', 'daisey') . '/files' . $_SERVER['REQUEST_URI']);
 	}
 }
