@@ -9,7 +9,7 @@ function daisey_init()
 	// User is logged in and the page does not excist
 	if(user_is_logged_in() && !menu_get_item($_GET['q'])) 
 	{
-		$allowedFileTypes = array("htm", "html", "css", "js", "png", "jpg", "gif", "png", "xml", "jpeg");
+		$allowedFileTypes = array("htm", "html", "css", "js", "png", "jpg", "gif", "png", "xml", "jpeg", "pdf");
 		$uriWQ =  explode("?", $_SERVER["REQUEST_URI"]);
 
 		$filePath = drupal_get_path('module', 'daisey') . '/files' . $uriWQ[0];
