@@ -17,7 +17,7 @@ function daisey_init()
 		if (file_exists($filePath))
 		{
 			$tex = explode(".", $filePath);
-			$tex = $tex[0];
+			$tex = $tex[count($tex) - 1];
 
 			if (array_search($tex, $allowedFileTypes) !== false)
 			{
