@@ -7,66 +7,85 @@
 function daisey_init() 
 {
 	// User is logged in and the page does not excist
-	if(user_is_logged_in() && !menu_get_item($_GET['q'])) 
+	if(!menu_get_item($_GET['q'])) 
 	{
-		$allowedFileTypes = array("htm", "html", "css", "js", "png", "jpg", "gif", "png", "xml", "jpeg", "pdf");
-		$uriWQ =  explode("?", $_SERVER["REQUEST_URI"]);
-		$filePath = "";
-		$headers = array();
-		
-
-
-		if (strpos($uriWQ[0], "/beskb.") === 0)// && strpos("/beskb.", $uriWQ[0]) < 2)
+		if (user_is_logged_in())
 		{
-			$filePath = 'BiZZdesign_Enterprise_Studio_Knowledge_Base/index.htm';
+
+			$allowedFileTypes = array("htm", "html", "css", "js", "png", "jpg", "gif", "png", "xml", "jpeg", "pdf");
+			$uriWQ =  explode("?", $_SERVER["REQUEST_URI"]);
+			$filePath = "";
+			$headers = array();
 			
-			switch ($uriWQ[0][7]) {
-				case 'D':
-					$file = explode(".", $uriWQ[0]);
-					drupal_goto('https://community.bizzdesign.com/' . $filePath . '#teamplatform/ac_errors/' . $file[1] . '.htm');
-					exit;
-					break;
-				case 'S':
-					$file = explode(".", $uriWQ[0]);
-					drupal_goto('https://community.bizzdesign.com/' . $filePath . '#teamplatform/ts_errors/' . $file[1] . '.htm');
-					exit;
-					break;
-				case 'I':
-					$file = explode(".", $uriWQ[0]);
-					drupal_goto('https://community.bizzdesign.com/' . $filePath . '#insite_server/is_errors/' . $file[1] . '.htm');
-					exit;
-					break;	
-			}
-			//print(phpversion());
-			//print("well, that's that.");
-			//print($uriWQ[0][7]);
-		}
-		else
-		{
-			$filePath = drupal_get_path('module', 'daisey') . '/files' . $uriWQ[0];
-		}
 
-		if (file_exists($filePath))
-		{
-			$tex = explode(".", $filePath);
-			$tex = $tex[count($tex) - 1];
 
-			if (array_search($tex, $allowedFileTypes) !== false)
+			if (strpos($uriWQ[0], "/beskb.") === 0)// && strpos("/beskb.", $uriWQ[0]) < 2)
 			{
-				$finfo = finfo_open(FILEINFO_MIME_TYPE);
-				$mime = finfo_file($finfo, $filePath);
-				finfo_close($finfo);
-
-				$size = filesize($filePath);
-
-				// New mimetype standard fix
-				if (strtolower($tex) == "css")
-				{
-					$mime = "text/css";
+				$filePath = 'BiZZdesign_Enterprise_Studio_Knowledge_Base/index.htm';
+				
+				switch ($uriWQ[0][7]) {
+					case 'D':
+						$file = explode(".", $uriWQ[0]);
+						drupal_goto('https://community.bizzdesign.com/' . $filePath . '#teamplatform/ac_errors/' . $file[1] . '.htm');
+						exit;
+						break;
+					case 'S':
+						$file = explode(".", $uriWQ[0]);
+						drupal_goto('https://community.bizzdesign.com/' . $filePath . '#teamplatform/ts_errors/' . $file[1] . '.htm');
+						exit;
+						break;
+					case 'I':
+						$file = explode(".", $uriWQ[0]);
+						drupal_goto('https://community.bizzdesign.com/' . $filePath . '#insite_server/is_errors/' . $file[1] . '.htm');
+						exit;
+						break;	
 				}
-				else if (strtolower($tex) == "js")
+				//print(phpversion());
+				//print("well, that's that.");
+				//print($uriWQ[0][7]);
+			}
+			else
+			{
+				$filePath = drupal_get_path('module', 'daisey') . '/files' . $uriWQ[0];
+			}
+
+			if (file_exists($filePath))
+			{
+				$allowedFileTypes = array("htm", "html", "css", "js", "png", "jpg", "gif", "png", "xml", "jpeg", "pdf");
+				$uriWQ =  explode("?", $_SERVER["REQUEST_URI"]);
+				$filePath = "";
+				$headers = array();
+				
+
+
+				if (strpos($uriWQ[0], "/beskb.") === 0)// && strpos("/beskb.", $uriWQ[0]) < 2)
 				{
-					$mime = "application/javascript";
+					$filePath = 'BiZZdesign_Enterprise_Studio_Knowledge_Base/index.htm';
+					
+					switch ($uriWQ[0][7]) {
+						case 'D':
+							$file = explode(".", $uriWQ[0]);
+							drupal_goto('https://community.bizzdesign.com/' . $filePath . '#teamplatform/ac_errors/' . $file[1] . '.htm');
+							exit;
+							break;
+						case 'S':
+							$file = explode(".", $uriWQ[0]);
+							drupal_goto('https://community.bizzdesign.com/' . $filePath . '#teamplatform/ts_errors/' . $file[1] . '.htm');
+							exit;
+							break;
+						case 'I':
+							$file = explode(".", $uriWQ[0]);
+							drupal_goto('https://community.bizzdesign.com/' . $filePath . '#teamplatform/is_errors/' . $file[1] . '.htm');
+							exit;
+							break;	
+					}
+					//print(phpversion());
+					//print("well, that's that.");
+					//print($uriWQ[0][7]);
+				}
+				else
+				{
+					$filePath = drupal_get_path('module', 'daisey') . '/files' . $uriWQ[0];
 				}
 
 				array_push($headers, header('Content-Type:' . $mime));
@@ -75,32 +94,69 @@ function daisey_init()
 			
 				if (ob_get_level()) 
 				{
-					ob_end_clean();
-				}
+					$finfo = finfo_open(FILEINFO_MIME_TYPE);
+					$mime = finfo_file($finfo, $filePath);
+					finfo_close($finfo);
 
-				foreach ($headers as $name => $value) 
-				{
-					drupal_add_http_header($name, $value);
-				}
+					$size = filesize($filePath);
 
-				drupal_send_headers();
-				
-				if ($fd = fopen($filePath, 'rb')) 
-				{
-					while (!feof($fd)) 
+					// New mimetype standard fix
+					if (strtolower($tex) == "css")
 					{
-						print fread($fd, 1024);
+						$mime = "text/css";
+					}
+					else if (strtolower($tex) == "js")
+					{
+						$mime = "application/javascript";
 					}
 
-					fclose($fd);
-				}
-				else 
-				{
-					drupal_not_found();
-				}
+					array_push($headers, header('Content-Type:' . $mime));
+					array_push($headers, header('Content-Length:' . $size));
+					array_push($headers, header('Cache-Control: max-age=604800, public'));
+				
+					if (ob_get_level()) 
+					{
+						ob_end_clean();
+					}
 
-				drupal_exit();
+					foreach ($headers as $name => $value) 
+					{
+						drupal_add_http_header($name, $value);
+					}
+
+					drupal_send_headers();
+					
+					if ($fd = fopen($filePath, 'rb')) 
+					{
+						while (!feof($fd)) 
+						{
+							print fread($fd, 1024);
+						}
+
+						fclose($fd);
+					}
+					else 
+					{
+						drupal_not_found();
+					}
+
+					drupal_exit();
+				}
 			}
+		}
+		else
+		{
+			drupal_goto('user', array('query'=>drupal_get_destination()) );
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
